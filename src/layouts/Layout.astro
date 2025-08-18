@@ -1,0 +1,44 @@
+---
+import ProgressBar from "../components/ProgressBar.jsx";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Access Paper</title>
+
+    <!-- NProgress CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+
+    <!-- Open Graph / Social Preview -->
+    <meta property="og:title" content="Access Paper" />
+    <meta property="og:description" content="Quickly find and access legal copies of full-text research papers using their DOI." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://accesspaper.fly.dev" />
+    <meta property="og:image" content="/og-image.png" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Access Paper" />
+    <meta name="twitter:description" content="Quickly find and access legal copies of full-text research papers using their DOI." />
+    <meta name="twitter:image" content="/og-image.png" />
+  </head>
+  <body>
+    <!-- Client-side loader -->
+    <ProgressBar client:load />
+    <slot />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

@@ -1,0 +1,12 @@
+---
+import Home from '../components/Home.astro';
+import Menu from '../components/Menu.jsx';
+import Layout from '../layouts/Layout.astro';
+import Main from '../components/Main.jsx';
+---
+
+<Layout>
+    <Menu client:load />
+	<Main client:load />
+	<Home />
+</Layout>
