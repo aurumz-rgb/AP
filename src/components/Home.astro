@@ -26,6 +26,9 @@ import { useEffect } from "preact/hooks";
   <meta name="twitter:title" content="AccessPaper | Free Research Articles">
   <meta name="twitter:description" content="Find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more.">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png">
+
+  <!-- Vercel Analytics -->
+  <script async defer src="https://analytics.vercel.com/script.js" data-token="YOUR_PROJECT_ANALYTICS_TOKEN"></script>
 </head>
 
 <body>
@@ -41,8 +44,8 @@ import { useEffect } from "preact/hooks";
   <footer id="bottom-panel">
     <div class="panel-content">
       <span> Version v2.0.0</span>
-      <a href="https://github.com/aurumz-rgb/AP" target="_blank" class="center-link">Open Source</a>
-      <a class="made-by" href="developer.html" target="_blank">Made with ♡ by Aurumz</a>
+      <span class="center-link">Open Source</span>
+      <span class="made-by">Made with ♡ by Aurumz</span>
     </div>
   </footer>
 </div>
@@ -164,14 +167,4 @@ import { useEffect } from "preact/hooks";
     .center-link { width: 100%; }
   }
 </style>
-
-<script type="module">
-  // Log visit to serverless API
-  useEffect(() => {
-    fetch("/api/log-visit", { method: "GET" })
-      .then(res => res.json())
-      .then(data => console.log("Visit logged:", data))
-      .catch(err => console.error("Logging failed:", err));
-  }, []);
-</script>
 </body>
