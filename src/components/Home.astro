@@ -146,67 +146,32 @@ import { useEffect } from "preact/hooks";
 
   /* RESPONSIVENESS */
   @media (max-width: 1024px) {
-    main {
-      padding-top: 70px;
-    }
-
-    #bottom-panel .panel-content {
-      font-size: 11px;
-    }
+    main { padding-top: 70px; }
+    #bottom-panel .panel-content { font-size: 11px; }
   }
 
   @media (max-width: 768px) {
-    main {
-      padding-top: 60px;
-    }
-
-    #bottom-panel .panel-content {
-      font-size: 11px;
-      gap: 3px;
-    }
-
-    .center-link {
-      position: static;
-      transform: none;
-      order: 2;
-      text-align: center;
-      width: 100%;
-    }
-
-    #bottom-panel .panel-content span {
-      flex: 1 1 45%;
-      text-align: center;
-    }
+    main { padding-top: 60px; }
+    #bottom-panel .panel-content { font-size: 11px; gap: 3px; }
+    .center-link { position: static; transform: none; order: 2; text-align: center; width: 100%; }
+    #bottom-panel .panel-content span { flex: 1 1 45%; text-align: center; }
   }
 
   @media (max-width: 480px) {
-    main {
-      padding-top: 50px;
-    }
-
-    #bottom-panel .panel-content {
-      flex-direction: column;
-      gap: 2px; /* reduce extra height to prevent scroll */
-    }
-
-    #bottom-panel .panel-content span {
-      flex: 1 1 100%;
-      text-align: center;
-    }
-
-    .center-link {
-      width: 100%;
-    }
+    main { padding-top: 50px; }
+    #bottom-panel .panel-content { flex-direction: column; gap: 2px; }
+    #bottom-panel .panel-content span { flex: 1 1 100%; text-align: center; }
+    .center-link { width: 100%; }
   }
 </style>
 
 <script type="module">
-  // Call your serverless API to log visit
-  if (typeof window !== "undefined") {
+  // Log visit to serverless API
+  useEffect(() => {
     fetch("/api/log-visit", { method: "GET" })
       .then(res => res.json())
       .then(data => console.log("Visit logged:", data))
       .catch(err => console.error("Logging failed:", err));
-  }
+  }, []);
 </script>
 </body>

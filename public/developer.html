@@ -25,53 +25,15 @@
       padding: 2rem;
       display: none; 
     }
-    h1, h2 {
-      margin: 0.5rem 0;
-    }
-    .stats {
-      display: flex;
-      justify-content: space-around;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-    }
-    .stat-box {
-      background: #1f1f1f;
-      padding: 1rem;
-      margin: 0.5rem;
-      border-radius: 8px;
-      flex: 1 1 200px;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.5);
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 1rem;
-      background: #1f1f1f;
-    }
-    table th, table td {
-      border: 1px solid #444;
-      padding: 0.5rem;
-      text-align: left;
-    }
-    table th {
-      background: #3498db;
-      color: white;
-    }
-    table td {
-      color: #e0e0e0;
-    }
-    #countryChartContainer {
-      margin-top: 2rem;
-      background: #1f1f1f;
-      padding: 1rem;
-      border-radius: 8px;
-      max-width: 600px;
-    }
-    canvas {
-      width: 100% !important;
-      height: 300px !important;
-    }
+    h1, h2 { margin: 0.5rem 0; }
+    .stats { display: flex; justify-content: space-around; flex-wrap: wrap; margin-bottom: 2rem; }
+    .stat-box { background: #1f1f1f; padding: 1rem; margin: 0.5rem; border-radius: 8px; flex: 1 1 200px; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.5);}
+    table { width: 100%; border-collapse: collapse; background: #1f1f1f; margin-top: 1rem; }
+    table th, table td { border: 1px solid #444; padding: 0.5rem; text-align: left; }
+    table th { background: #3498db; color: white; }
+    table td { color: #e0e0e0; }
+    #countryChartContainer { margin-top: 2rem; background: #1f1f1f; padding: 1rem; border-radius: 8px; max-width: 600px; }
+    canvas { width: 100% !important; height: 300px !important; }
   </style>
 </head>
 <body>
@@ -119,58 +81,76 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module">
-  // Prompt password from environment variable via serverless proxy
-  async function checkPassword() {
-    const password = prompt("Enter password to access developer dashboard:");
-    const res = await fetch("/api/check-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ password })
-    });
-    const data = await res.json();
-    return data.success;
+  // PASSWORD CHECK
+  const PASSWORD = "YOUR_SECRET_PASSWORD"; // change to something secure
+  const entered = prompt("Enter password to access developer dashboard:");
+  if(entered !== PASSWORD){
+    alert("Incorrect password. Access denied.");
+    document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;color:red;'>Access Denied</h1>";
+    throw new Error("Access denied");
+  } else {
+    document.getElementById("dashboard").style.display = "block";
   }
 
-  async function fetchLogs() {
-    const logsTable = document.getElementById("logsTable");
-    const totalVisitsEl = document.getElementById("totalVisits");
-    const uniqueIPsEl = document.getElementById("uniqueIPs");
-    const lastVisitEl = document.getElementById("lastVisit");
-    const ctx = document.getElementById("countryChart").getContext("2d");
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
+  import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
 
+  // FIREBASE CONFIG
+  const firebaseConfig = {
+    apiKey: "AIzaSyBDeLZ7F_bbsk11U8dkl1dLNusZn777e1U",
+    authDomain: "accesspaper-stats.firebaseapp.com",
+    projectId: "accesspaper-stats",
+    storageBucket: "accesspaper-stats.appspot.com",
+    messagingSenderId: "451944654689",
+    appId: "1:451944654689:web:8b7d8bce4d79a63033c720",
+    measurementId: "G-8FD0L4W3E8"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const logsTable = document.getElementById("logsTable");
+  const totalVisitsEl = document.getElementById("totalVisits");
+  const uniqueIPsEl = document.getElementById("uniqueIPs");
+  const lastVisitEl = document.getElementById("lastVisit");
+  const ctx = document.getElementById("countryChart").getContext("2d");
+
+  let countryChart = null;
+
+  async function fetchLogs() {
     try {
       logsTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
-      const res = await fetch("/api/logs");
-      const data = await res.json();
-      const logs = data.logs || [];
+      const logsCol = collection(db, "logs");
+      const q = query(logsCol, orderBy("timestamp", "desc"));
+      const logsSnapshot = await getDocs(q);
 
       let totalVisits = 0;
       let uniqueIPs = new Set();
       let countryCounts = {};
       let rows = "";
 
-      logs.forEach(log => {
-        const date = new Date(log.timestamp).toLocaleString();
-        const country = log.country || "Unknown";
+      logsSnapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const date = data.timestamp.toDate ? data.timestamp.toDate().toLocaleString() : new Date(data.timestamp).toLocaleString();
+        const country = data.country || "Unknown";
         rows += `<tr>
           <td>${date}</td>
-          <td>${log.ip}</td>
+          <td>${data.ip}</td>
           <td>${country}</td>
-          <td>${log.userAgent}</td>
+          <td>${data.userAgent}</td>
         </tr>`;
         totalVisits++;
-        uniqueIPs.add(log.ip);
+        uniqueIPs.add(data.ip);
         countryCounts[country] = (countryCounts[country] || 0) + 1;
       });
 
       logsTable.innerHTML = rows || "<tr><td colspan='4'>No logs found</td></tr>";
       totalVisitsEl.textContent = totalVisits;
       uniqueIPsEl.textContent = uniqueIPs.size;
-      lastVisitEl.textContent = logs.length ? new Date(logs[0].timestamp).toLocaleString() : "-";
+      lastVisitEl.textContent = logsSnapshot.size ? (logsSnapshot.docs[0].data().timestamp.toDate ? logsSnapshot.docs[0].data().timestamp.toDate().toLocaleString() : new Date(logsSnapshot.docs[0].data().timestamp).toLocaleString()) : "-";
 
-      // Country chart
-      if(window.countryChart) window.countryChart.destroy();
-      window.countryChart = new Chart(ctx, {
+      if(countryChart) countryChart.destroy();
+      countryChart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: Object.keys(countryCounts),
@@ -198,18 +178,7 @@
     }
   }
 
-  // Main
-  (async () => {
-    const auth = await checkPassword();
-    if(!auth) {
-      alert("Incorrect password. Access denied.");
-      document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;color:red;'>Access Denied</h1>";
-      return;
-    }
-    document.getElementById("dashboard").style.display = "block";
-    fetchLogs();
-  })();
+  fetchLogs();
 </script>
-
 </body>
 </html>
