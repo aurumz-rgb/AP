@@ -7,26 +7,36 @@ import ProgressBar from "../components/ProgressBar.jsx";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Access Paper</title>
+
+    <!-- Google Site Verification -->
+    <meta name="google-site-verification" content="UtQa3kQbka9YHVvT5NL7Fy12ZPbGFpsFJZJ9hQ48Lmc" />
+
+    <title>AccessPaper</title>
+    <meta name="description" content="AccessPaper helps you find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more." />
+    <meta name="keywords" content="research papers, free articles, DOI, open access, academic research, scholarly articles, Unpaywall, arXiv, PubMed" />
+    <meta name="author" content="Aurumz" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://accesspaper.vercel.app" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://accesspaper.vercel.app" />
+    <meta property="og:title" content="AccessPaper | Free Research Articles" />
+    <meta property="og:description" content="Find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://accesspaper.vercel.app" />
+    <meta name="twitter:title" content="AccessPaper | Free Research Articles" />
+    <meta name="twitter:description" content="Find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png" />
 
     <!-- NProgress CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
-
-    <!-- Open Graph / Social Preview -->
-    <meta property="og:title" content="Access Paper" />
-    <meta property="og:description" content="Quickly find and access legal copies of full-text research papers using their DOI." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://accesspaper.fly.dev" />
-    <meta property="og:image" content="/og-image.png" />
-
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Access Paper" />
-    <meta name="twitter:description" content="Quickly find and access legal copies of full-text research papers using their DOI." />
-    <meta name="twitter:image" content="/og-image.png" />
   </head>
+
   <body>
     <!-- Client-side loader -->
     <ProgressBar client:load />
@@ -40,5 +50,7 @@ import ProgressBar from "../components/ProgressBar.jsx";
     margin: 0;
     width: 100%;
     height: 100%;
+    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+    background-color: #1e1e1e;
   }
 </style>

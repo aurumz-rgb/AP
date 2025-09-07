@@ -4,13 +4,19 @@ import Analytics from '@vercel/analytics/astro';
 import Menu from '../components/Menu.jsx';
 import Layout from '../layouts/Layout.astro';
 import Main from '../components/Main.jsx';
-import  SpeedInsights  from "@vercel/speed-insights/astro"
+import SpeedInsights from "@vercel/speed-insights/astro";
 ---
 
 <Layout>
-    <Menu client:load />
-	<Main client:load />
-	<Home />
-	<Analytics />
-	<SpeedInsights />
+  <!-- Inject head meta for Google verification -->
+  <svelte:fragment slot="head">
+    <meta name="google-site-verification" content="UtQa3kQbka9YHVvT5NL7Fy12ZPbGFpsFJZJ9hQ48Lmc" />
+  </svelte:fragment>
+
+  <!-- Main content -->
+  <Menu client:load />
+  <Main client:load />
+  <Home />
+  <Analytics />
+  <SpeedInsights />
 </Layout>

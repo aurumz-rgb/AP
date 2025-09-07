@@ -1,37 +1,5 @@
 ---
-import { useEffect } from "preact/hooks";
 ---
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AccessPaper | Free Research Articles</title>
-  <meta name="description" content="AccessPaper helps you find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more." />
-  <meta name="keywords" content="research papers, free articles, DOI, open access, academic research, scholarly articles, Unpaywall, arXiv, PubMed" />
-  <meta name="author" content="Aurumz" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://accesspaper.vercel.app" />
-  <link rel="icon" href="/favicon.png" type="image/png" />
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://accesspaper.vercel.app">
-  <meta property="og:title" content="AccessPaper | Free Research Articles">
-  <meta property="og:description" content="Find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more.">
-  <meta property="og:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png">
-
-  <!-- Twitter -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:url" content="https://accesspaper.vercel.app">
-  <meta name="twitter:title" content="AccessPaper | Free Research Articles">
-  <meta name="twitter:description" content="Find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more.">
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png">
-
-  <!-- Vercel Analytics -->
-  <script async defer src="https://analytics.vercel.com/script.js" data-token="YOUR_PROJECT_ANALYTICS_TOKEN"></script>
-</head>
-
-<body>
 <div id="container">
   <img id="background" src="/background.svg" alt="" fetchpriority="high" />
 
@@ -44,7 +12,7 @@ import { useEffect } from "preact/hooks";
   <footer id="bottom-panel">
     <div class="panel-content">
       <span> Version v2.0.0</span>
-      <span class="center-link">Open Source</span>
+      <span class="center-link"><a href="https://github.com/aurumz-rgb/AP" target="_blank" rel="noopener noreferrer">Open Source</a></span>
       <span class="made-by">Made with ♡ by Aurumz</span>
     </div>
   </footer>
@@ -167,4 +135,3 @@ import { useEffect } from "preact/hooks";
     .center-link { width: 100%; }
   }
 </style>
-</body>
