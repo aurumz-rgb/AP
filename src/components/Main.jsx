@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "preact/hooks";
 import lottie from "lottie-web";
-import animationData from "../assets/lottie4.json";
+import animationData from "../assets/lottie22.json";
 
 function LottieAnimation({ loop = true }) {
   const containerRef = useRef(null);
@@ -21,9 +21,9 @@ function LottieAnimation({ loop = true }) {
       ref={containerRef}
       style={{
         width: "100%",
-        height: "300px",
-        maxWidth: 500,
-        margin: "90px auto 0 auto",
+        height: "500px",
+        maxWidth: 700,
+        margin: "70px auto 0 auto",
       }}
     />
   );
@@ -124,7 +124,7 @@ export default function Main() {
             aria-atomic="true"
             style={{
               fontWeight: 800,
-              color: "#0a66c2",
+              color: "#003566ff",
               fontSize: "3.5rem",
               textAlign: "center",
               marginBottom: "16px",
@@ -177,13 +177,13 @@ export default function Main() {
               autoComplete="off"
               style={{
                 flex: 1,
-                padding: "14px 18px",
-                fontSize: "1rem",
+                padding: "16px 18px",
+                fontSize: "1.1rem",
                 border: "1px solid #ccc",
                 borderRight: "none",
                 outline: "none",
               }}
-              onFocus={(e) => (e.target.style.border = "1.7px solid #0a66c2")}
+              onFocus={(e) => (e.target.style.border = "1.7px solid #003566ff")}
               onBlur={(e) => (e.target.style.border = "1px solid #ccc")}
             />
             <button
@@ -192,9 +192,9 @@ export default function Main() {
               aria-label="Search button"
               type="button"
               style={{
-                padding: "14px 24px",
-                fontSize: "1rem",
-                backgroundColor: "#0a66c2",
+                padding: "16px 28px",
+                fontSize: "1.1rem",
+                backgroundColor: "#003566ff",
                 color: "#fff",
                 border: "none",
                 fontWeight: 600,
@@ -202,10 +202,10 @@ export default function Main() {
                 transition: "background-color 0.25s ease",
               }}
               onMouseEnter={(e) => {
-                if (!loading) e.target.style.backgroundColor = "#084a9c";
+                if (!loading) e.target.style.backgroundColor = "#001a33";
               }}
               onMouseLeave={(e) => {
-                e.target.style.backgroundColor = "#0a66c2";
+                e.target.style.backgroundColor = "#003566ff";
               }}
             >
               {loading ? "Searching..." : "Search"}
@@ -250,7 +250,7 @@ export default function Main() {
           <h2
             style={{
               fontWeight: 700,
-              color: "#0a66c2",
+              color: "#003566ff",
               marginBottom: 20,
               fontSize: "1.8rem",
               textAlign: "center",
@@ -289,19 +289,20 @@ export default function Main() {
                 rel="noopener noreferrer"
                 style={{
                   display: "inline-block",
-                  padding: "12px 20px",
-                  backgroundColor: "#0a66c2",
+                  padding: "14px 24px",
+                  backgroundColor: "#003566ff",
                   color: "#fff",
                   fontWeight: 600,
                   borderRadius: 6,
                   textDecoration: "none",
                   transition: "background-color 0.25s ease",
+                  fontSize: "1.1rem",
                 }}
                 onMouseEnter={(e) =>
-                  (e.target.style.backgroundColor = "#084a9c")
+                  (e.target.style.backgroundColor = "#001a33")
                 }
                 onMouseLeave={(e) =>
-                  (e.target.style.backgroundColor = "#0a66c2")
+                  (e.target.style.backgroundColor = "#003566ff")
                 }
               >
                 Download PDF
@@ -327,11 +328,11 @@ export default function Main() {
             style={{
               marginTop: 32,
               width: "100%",
-              padding: "14px",
+              padding: "16px",
               backgroundColor: "#f2f2f2",
-              color: "#0a66c2",
+              color: "#003566ff",
               fontWeight: 600,
-              fontSize: "1rem",
+              fontSize: "1.1rem",
               border: "1px solid #ccc",
               borderRadius: 6,
               cursor: "pointer",
@@ -355,8 +356,8 @@ export default function Main() {
         @media (max-width: 700px) {
           #fadein-title { font-size: 2.5rem !important; }
           #tagline { font-size: 1rem !important; }
-          #search-bar input { font-size: 0.9rem !important; padding: 12px 14px !important; }
-          #search-bar button { font-size: 0.9rem !important; padding: 12px 18px !important; }
+          #search-bar input { font-size: 1rem !important; padding: 14px 16px !important; }
+          #search-bar button { font-size: 1rem !important; padding: 14px 20px !important; }
           #paper-info h2 { font-size: 1.5rem !important; }
           #paper-info p { font-size: 0.95rem !important; }
         }

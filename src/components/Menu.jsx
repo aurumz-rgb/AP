@@ -358,16 +358,16 @@ export default function Menu() {
           #hamburger { cursor: pointer; width: 25px; height: 20px; display: flex; flex-direction: column; justify-content: space-between; padding: 6px; border-radius: 6px; }
           #hamburger span { display: block; height: 4px; background: #333; border-radius: 2px; }
           #help-toggle { position: fixed; top: 20px; right: 20px; width: 32px; height: 32px; border-radius: 50%; background: #fff; color: #222; font-weight: 700; font-size: 20px; line-height: 32px; text-align: center; cursor: pointer; user-select: none; transition: background-color 0.25s ease, color 0.25s ease; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; border: none; }
-          #help-toggle:hover, #help-toggle:focus { background-color: #e8f0fe; color: #0a66c2; outline: none; }
+          #help-toggle:hover, #help-toggle:focus { background-color: #e8f0fe; color: #003566ff; outline: none; }
           #menu-options { margin-top: 12px; background: #fff; border-radius: 10px; padding: 16px 20px; box-shadow: 0 4px 12px rgba(0,0,0,0.07); width: 220px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; user-select: none; font-weight: 500; position: relative; }
           #menu-options a, #menu-options button { display: block; width: 100%; padding: 8px 12px; box-sizing: border-box; margin-bottom: 12px; background: none; border: none; text-align: left; cursor: pointer; font-size: 16px; color: #222; text-decoration: none; border-radius: 6px; transition: background-color 0.25s ease, color 0.25s ease; font-weight: 500; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
           .menu-link { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; font-weight: 500; color: #222; padding: 8px 12px; border-radius: 6px; transition: background-color 0.25s ease, color 0.25s ease; text-decoration: none; display: block; box-sizing: border-box; margin-bottom: 12px; }
-          .menu-link:hover { color: #0a66c2; background-color: #e8f0fe; }
+          .menu-link:hover { color: #003566ff; background-color: #e8f0fe; }
           #menu-options a:first-child, #menu-options button:first-child { margin-top: 0; }
           #menu-options a:last-child, #menu-options button:last-child { margin-bottom: 0; }
-          #menu-options a:hover, #menu-options button:hover { color: #0a66c2; background-color: #e8f0fe; }
+          #menu-options a:hover, #menu-options button:hover { color: #003566ff; background-color: #e8f0fe; }
           #dev-login-form input { width: 100%; padding: 10px 14px; margin-bottom: 10px; box-sizing: border-box; border: 1.5px solid #ccc; border-radius: 8px; font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: border-color 0.25s ease; }
-          #dev-login-form input:focus { outline: none; border-color: #0a66c2; box-shadow: 0 0 6px rgba(10,102,194,0.3); }
+          #dev-login-form input:focus { outline: none; border-color: #003566ff; box-shadow: 0 0 6px rgba(10,102,194,0.3); }
           #dev-stats { font-size: 14px; color: #444; font-weight: 400; line-height: 1.5; }
           #menu-options h3 { margin-top: 0; margin-bottom: 8px; font-weight: 600; font-size: 18px; color: #222; }
           #menu-options p { font-size: 14px; line-height: 1.5; color: #444; margin-bottom: 8px; }
