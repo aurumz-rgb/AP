@@ -4,6 +4,7 @@ import { useEffect } from "preact/hooks";
 // Firebase Logging Setup
 import { initializeApp } from "firebase/app";
 import { getAnalytics, logEvent } from "firebase/analytics";
+import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBDeLZ7F_bbsk11U8dkl1dLNusZn777e1U",
@@ -18,9 +19,34 @@ const firebaseConfig = {
 if (typeof window !== "undefined") {
   const app = initializeApp(firebaseConfig);
   const analytics = getAnalytics(app);
+  const db = getFirestore(app);
+
+  async function logVisit() {
+    try {
+      // Get IP + country info
+      const geo = await fetch("https://ipapi.co/json/")
+        .then(r => r.json())
+        .catch(() => null);
+
+      const ip = geo?.ip || "Unknown";
+      const country = geo?.country_name || "Unknown";
+
+      await addDoc(collection(db, "logs"), {
+        ip,
+        userAgent: navigator.userAgent,
+        country,
+        timestamp: serverTimestamp()
+      });
+
+      console.log("Visit logged:", ip, country);
+    } catch (e) {
+      console.error("Failed to log visit:", e);
+    }
+  }
 
   useEffect(() => {
     logEvent(analytics, "page_view", { page_title: "Home" });
+    logVisit();
   }, []);
 }
 ---
@@ -34,7 +60,7 @@ if (typeof window !== "undefined") {
   <meta name="author" content="Aurumz" />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://accesspaper.vercel.app" />
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="/favicon.png" type="image/png" />
 
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
