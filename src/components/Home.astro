@@ -1,3 +1,56 @@
+---
+import { useEffect } from "preact/hooks";
+
+// Firebase Logging Setup
+import { initializeApp } from "firebase/app";
+import { getAnalytics, logEvent } from "firebase/analytics";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBDeLZ7F_bbsk11U8dkl1dLNusZn777e1U",
+  authDomain: "accesspaper-stats.firebaseapp.com",
+  projectId: "accesspaper-stats",
+  storageBucket: "accesspaper-stats.appspot.com",
+  messagingSenderId: "451944654689",
+  appId: "1:451944654689:web:8b7d8bce4d79a63033c720",
+  measurementId: "G-8FD0L4W3E8"
+};
+
+if (typeof window !== "undefined") {
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+
+  useEffect(() => {
+    logEvent(analytics, "page_view", { page_title: "Home" });
+  }, []);
+}
+---
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AccessPaper | Free Research Articles</title>
+  <meta name="description" content="AccessPaper helps you find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more." />
+  <meta name="keywords" content="research papers, free articles, DOI, open access, academic research, scholarly articles, Unpaywall, arXiv, PubMed" />
+  <meta name="author" content="Aurumz" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://accesspaper.vercel.app" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://accesspaper.vercel.app">
+  <meta property="og:title" content="AccessPaper | Free Research Articles">
+  <meta property="og:description" content="Find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more.">
+  <meta property="og:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:url" content="https://accesspaper.vercel.app">
+  <meta name="twitter:title" content="AccessPaper | Free Research Articles">
+  <meta name="twitter:description" content="Find free, legal full-text research articles instantly using DOI search. Trusted sources include Unpaywall, arXiv, bioRxiv, PubMed Central, and more.">
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png">
+</head>
+
+<body>
 <div id="container">
   <img id="background" src="/background.svg" alt="" fetchpriority="high" />
 
@@ -9,9 +62,9 @@
   <!-- Full-width Bottom Panel -->
   <footer id="bottom-panel">
     <div class="panel-content">
-      <span> Version v1.0.1</span>
-      <a href="https://github.com/aurumz-rgb/AccessPaper" target="_blank" class="center-link">Open Source</a>
-      <span class="made-by">Made with ♡ by Aurumz</span>
+      <span> Version v2.0.0</span>
+      <a href="https://github.com/aurumz-rgb/AP" target="_blank" class="center-link">Open Source</a>
+      <a class="made-by" href="developer.html" target="_blank">Made with ♡ by Aurumz</a>
     </div>
   </footer>
 </div>
@@ -168,3 +221,4 @@
     }
   }
 </style>
+</body>

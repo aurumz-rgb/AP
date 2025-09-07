@@ -1,20 +1,9 @@
 import { useState, useEffect } from "preact/hooks";
 
-const DEV_PASSWORD = import.meta.env.PUBLIC_DEV_PASSWORD || "";
 const API_BASE = import.meta.env.PUBLIC_API_BASE || ""; 
 
 export default function Menu() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [showLogin, setShowLogin] = useState(false);
-  const [showStats, setShowStats] = useState(false);
-  const [password, setPassword] = useState("");
-  const [stats, setStats] = useState({
-    total_users: 0,
-    total_visits: 0,
-    papers_processed: 0,
-    last_update: "-",
-    unique_ips: [],
-  });
   const [helpOpen, setHelpOpen] = useState(false);
   const [infoOpen, setInfoOpen] = useState(false);
 
@@ -54,69 +43,6 @@ export default function Menu() {
     }
   };
 
-  const fetchTrackedStats = async () => {
-    try {
-      const res = await fetch(`${API_BASE}/api/stats/track`);
-      if (!res.ok) throw new Error("Failed to fetch tracked stats");
-      const data = await res.json();
-
-      if (data.last_update && data.last_update !== "-") {
-        data.last_update = convertToGeorgianTime(data.last_update);
-      }
-      setStats(data);
-    } catch (e) {
-      console.warn("Error fetching tracked stats:", e);
-    }
-  };
-
-  useEffect(() => {
-    fetchTrackedStats();
-  }, []);
-
-  const loginDev = async () => {
-    if (password.trim() === DEV_PASSWORD) {
-      setShowLogin(false);
-      setShowStats(true);
-
-      try {
-        const res = await fetch(`${API_BASE}/api/stats`);
-        if (!res.ok) throw new Error("Failed to fetch stats");
-        const data = await res.json();
-
-        if (data.last_update && data.last_update !== "-") {
-          data.last_update = convertToGeorgianTime(data.last_update);
-        }
-
-        setStats(data);
-      } catch (e) {
-        alert("Error fetching stats.");
-      }
-    } else {
-      alert("Incorrect password!");
-    }
-  };
-
-  const resetStats = async () => {
-    if (!confirm("Are you sure you want to reset all stats? This cannot be undone.")) return;
-    try {
-      const res = await fetch(`${API_BASE}/api/reset-stats`, {
-        method: "POST",
-        headers: {
-          "x-dev-password": DEV_PASSWORD,
-        },
-      });
-      if (!res.ok) throw new Error("Failed to reset stats");
-      const data = await res.json();
-      if (data.last_update && data.last_update !== "-") {
-        data.last_update = convertToGeorgianTime(data.last_update);
-      }
-      setStats(data);
-      alert("Stats have been reset.");
-    } catch (e) {
-      alert("Error resetting stats.");
-    }
-  };
-
   return (
     <>
       <div id="menu-container">
@@ -152,87 +78,6 @@ export default function Menu() {
             </a>
 
             <button onClick={() => setInfoOpen(!infoOpen)}>Info</button>
-
-            <div id="dev-login">
-              <button onClick={() => setShowLogin(!showLogin)}>Developer</button>
-
-              {showLogin && (
-                <div id="dev-login-form">
-                  <input
-                    type="password"
-                    value={password}
-                    onInput={(e) => setPassword(e.target.value)}
-                    placeholder="Enter Password"
-                    autoComplete="off"
-                    onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                        e.preventDefault();
-                        loginDev();
-                      }
-                    }}
-                  />
-                  <button onClick={loginDev}>Login</button>
-                </div>
-              )}
-
-              {showStats && (
-                <div
-                  id="dev-stats"
-                  style={{ fontSize: "14px", color: "#444", lineHeight: 1.5 }}
-                >
-                  <h3>Backend Stats</h3>
-                  <p>
-                    <strong>Total Unique Users:</strong>{" "}
-                    {stats.total_users !== undefined ? stats.total_users : 0}
-                  </p>
-                  <p>
-                    <strong>Total Visits:</strong>{" "}
-                    {stats.total_visits !== undefined ? stats.total_visits : 0}
-                  </p>
-                  <p>
-                    <strong>Papers Processed:</strong>{" "}
-                    {stats.papers_processed !== undefined ? stats.papers_processed : 0}
-                  </p>
-                  <p>
-                    <strong>Last Update:</strong>{" "}
-                    {stats.last_update !== undefined ? stats.last_update : "-"}
-                  </p>
-                  <button
-                    style={{
-                      marginTop: "12px",
-                      padding: "6px 10px",
-                      background: "#f5f5f5",
-                      border: "1px solid #ccc",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                      color: "red",
-                      fontWeight: "bold",
-                    }}
-                    onClick={resetStats}
-                  >
-                    Reset Stats
-                  </button>
-                  <button
-                    style={{
-                      marginTop: "12px",
-                      padding: "6px 10px",
-                      background: "#f5f5f5",
-                      border: "1px solid #ccc",
-                      borderRadius: "6px",
-                      cursor: "pointer",
-                      fontSize: "14px",
-                    }}
-                    onClick={() => {
-                      setShowStats(false);
-                      setShowLogin(true);
-                    }}
-                  >
-                    ← Back
-                  </button>
-                </div>
-              )}
-            </div>
 
             <button
               style={{
@@ -353,7 +198,6 @@ export default function Menu() {
 
       <style>
         {`
-          
           #menu-container { position: fixed; top: 20px; left: 20px; z-index: 1200; }
           #hamburger { cursor: pointer; width: 25px; height: 20px; display: flex; flex-direction: column; justify-content: space-between; padding: 6px; border-radius: 6px; }
           #hamburger span { display: block; height: 4px; background: #333; border-radius: 2px; }
@@ -366,21 +210,16 @@ export default function Menu() {
           #menu-options a:first-child, #menu-options button:first-child { margin-top: 0; }
           #menu-options a:last-child, #menu-options button:last-child { margin-bottom: 0; }
           #menu-options a:hover, #menu-options button:hover { color: #003566ff; background-color: #e8f0fe; }
-          #dev-login-form input { width: 100%; padding: 10px 14px; margin-bottom: 10px; box-sizing: border-box; border: 1.5px solid #ccc; border-radius: 8px; font-size: 15px; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; transition: border-color 0.25s ease; }
-          #dev-login-form input:focus { outline: none; border-color: #003566ff; box-shadow: 0 0 6px rgba(10,102,194,0.3); }
-          #dev-stats { font-size: 14px; color: #444; font-weight: 400; line-height: 1.5; }
           #menu-options h3 { margin-top: 0; margin-bottom: 8px; font-weight: 600; font-size: 18px; color: #222; }
           #menu-options p { font-size: 14px; line-height: 1.5; color: #444; margin-bottom: 8px; }
 
-          
           @media (max-width: 768px) {
             #menu-options { width: 90vw; max-width: 300px; padding: 14px 16px; }
             #help-toggle { width: 28px; height: 28px; font-size: 18px; line-height: 28px; }
             #hamburger { width: 22px; height: 18px; }
             #hamburger span { height: 3px; }
-            #dev-login-form input { font-size: 14px; padding: 8px 12px; }
             #menu-options h3 { font-size: 16px; }
-            #menu-options p, #dev-stats { font-size: 13px; }
+            #menu-options p { font-size: 13px; }
             #menu-options a, #menu-options button, .menu-link { font-size: 15px; padding: 6px 10px; }
           }
 
@@ -390,9 +229,8 @@ export default function Menu() {
             #menu-options { width: 95vw; max-width: 260px; padding: 12px 14px; }
             #hamburger { width: 20px; height: 16px; }
             #hamburger span { height: 2.5px; }
-            #dev-login-form input { font-size: 13px; padding: 6px 10px; }
             #menu-options h3 { font-size: 15px; }
-            #menu-options p, #dev-stats { font-size: 12px; }
+            #menu-options p { font-size: 12px; }
             #menu-options a, #menu-options button, .menu-link { font-size: 14px; padding: 5px 8px; }
           }
         `}
