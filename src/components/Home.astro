@@ -1,54 +1,5 @@
 ---
 import { useEffect } from "preact/hooks";
-
-// Firebase Logging Setup
-import { initializeApp } from "firebase/app";
-import { getAnalytics, logEvent } from "firebase/analytics";
-import { getFirestore, collection, addDoc, serverTimestamp } from "firebase/firestore";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyBDeLZ7F_bbsk11U8dkl1dLNusZn777e1U",
-  authDomain: "accesspaper-stats.firebaseapp.com",
-  projectId: "accesspaper-stats",
-  storageBucket: "accesspaper-stats.appspot.com",
-  messagingSenderId: "451944654689",
-  appId: "1:451944654689:web:8b7d8bce4d79a63033c720",
-  measurementId: "G-8FD0L4W3E8"
-};
-
-if (typeof window !== "undefined") {
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-  const db = getFirestore(app);
-
-  async function logVisit() {
-    try {
-      // Get IP + country info
-      const geo = await fetch("https://ipapi.co/json/")
-        .then(r => r.json())
-        .catch(() => null);
-
-      const ip = geo?.ip || "Unknown";
-      const country = geo?.country_name || "Unknown";
-
-      await addDoc(collection(db, "logs"), {
-        ip,
-        userAgent: navigator.userAgent,
-        country,
-        timestamp: serverTimestamp()
-      });
-
-      console.log("Visit logged:", ip, country);
-    } catch (e) {
-      console.error("Failed to log visit:", e);
-    }
-  }
-
-  useEffect(() => {
-    logEvent(analytics, "page_view", { page_title: "Home" });
-    logVisit();
-  }, []);
-}
 ---
 
 <head>
@@ -248,4 +199,14 @@ if (typeof window !== "undefined") {
     }
   }
 </style>
+
+<script type="module">
+  // Call your serverless API to log visit
+  if (typeof window !== "undefined") {
+    fetch("/api/log-visit", { method: "GET" })
+      .then(res => res.json())
+      .then(data => console.log("Visit logged:", data))
+      .catch(err => console.error("Logging failed:", err));
+  }
+</script>
 </body>

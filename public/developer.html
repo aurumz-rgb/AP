@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Access Paper</title>
-  <link rel="icon" href="assets/icon.png" type="image/png">
+  <link rel="icon" href="/favicon.png" type="image/png">
   <meta name="description" content="AccessPaper Developer Dashboard - view global visitor stats powered by Firebase Firestore">
   <meta name="robots" content="index, follow">
   <style>
@@ -119,75 +119,58 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module">
-  const PASSWORD = "https://accesspaper.vercel.app"; 
-  const entered = prompt("Enter password to access developer dashboard:");
-  if(entered !== PASSWORD){
-    alert("Incorrect password. Access denied.");
-    document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;color:red;'>Access Denied</h1>";
-    throw new Error("Access denied");
-  } else {
-    document.getElementById("dashboard").style.display = "block";
+  // Prompt password from environment variable via serverless proxy
+  async function checkPassword() {
+    const password = prompt("Enter password to access developer dashboard:");
+    const res = await fetch("/api/check-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ password })
+    });
+    const data = await res.json();
+    return data.success;
   }
 
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-app.js";
-  import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore.js";
-
-  // Firebase config
-  const firebaseConfig = {
-    apiKey: "AIzaSyBDeLZ7F_bbsk11U8dkl1dLNusZn777e1U",
-    authDomain: "accesspaper-stats.firebaseapp.com",
-    projectId: "accesspaper-stats",
-    storageBucket: "accesspaper-stats.appspot.com",
-    messagingSenderId: "451944654689",
-    appId: "1:451944654689:web:8b7d8bce4d79a63033c720",
-    measurementId: "G-8FD0L4W3E8"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  const logsTable = document.getElementById("logsTable");
-  const totalVisitsEl = document.getElementById("totalVisits");
-  const uniqueIPsEl = document.getElementById("uniqueIPs");
-  const lastVisitEl = document.getElementById("lastVisit");
-  const ctx = document.getElementById("countryChart").getContext("2d");
-
-  let countryChart = null;
-
   async function fetchLogs() {
+    const logsTable = document.getElementById("logsTable");
+    const totalVisitsEl = document.getElementById("totalVisits");
+    const uniqueIPsEl = document.getElementById("uniqueIPs");
+    const lastVisitEl = document.getElementById("lastVisit");
+    const ctx = document.getElementById("countryChart").getContext("2d");
+
     try {
       logsTable.innerHTML = "<tr><td colspan='4'>Loading...</td></tr>";
-      const logsCol = collection(db, "logs");
-      const q = query(logsCol, orderBy("timestamp", "desc"));
-      const logsSnapshot = await getDocs(q);
+      const res = await fetch("/api/logs");
+      const data = await res.json();
+      const logs = data.logs || [];
 
       let totalVisits = 0;
       let uniqueIPs = new Set();
       let countryCounts = {};
       let rows = "";
 
-      logsSnapshot.forEach(docSnap => {
-        const data = docSnap.data();
-        const date = data.timestamp.toDate ? data.timestamp.toDate().toLocaleString() : new Date(data.timestamp).toLocaleString();
-        const country = data.country || "Unknown";
+      logs.forEach(log => {
+        const date = new Date(log.timestamp).toLocaleString();
+        const country = log.country || "Unknown";
         rows += `<tr>
           <td>${date}</td>
-          <td>${data.ip}</td>
+          <td>${log.ip}</td>
           <td>${country}</td>
-          <td>${data.userAgent}</td>
+          <td>${log.userAgent}</td>
         </tr>`;
         totalVisits++;
-        uniqueIPs.add(data.ip);
+        uniqueIPs.add(log.ip);
         countryCounts[country] = (countryCounts[country] || 0) + 1;
       });
 
       logsTable.innerHTML = rows || "<tr><td colspan='4'>No logs found</td></tr>";
       totalVisitsEl.textContent = totalVisits;
       uniqueIPsEl.textContent = uniqueIPs.size;
-      lastVisitEl.textContent = logsSnapshot.size ? (logsSnapshot.docs[0].data().timestamp.toDate ? logsSnapshot.docs[0].data().timestamp.toDate().toLocaleString() : new Date(logsSnapshot.docs[0].data().timestamp).toLocaleString()) : "-";
+      lastVisitEl.textContent = logs.length ? new Date(logs[0].timestamp).toLocaleString() : "-";
 
-      if(countryChart) countryChart.destroy();
-      countryChart = new Chart(ctx, {
+      // Country chart
+      if(window.countryChart) window.countryChart.destroy();
+      window.countryChart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: Object.keys(countryCounts),
@@ -215,7 +198,17 @@
     }
   }
 
-  fetchLogs();
+  // Main
+  (async () => {
+    const auth = await checkPassword();
+    if(!auth) {
+      alert("Incorrect password. Access denied.");
+      document.body.innerHTML = "<h1 style='text-align:center;margin-top:50px;color:red;'>Access Denied</h1>";
+      return;
+    }
+    document.getElementById("dashboard").style.display = "block";
+    fetchLogs();
+  })();
 </script>
 
 </body>
