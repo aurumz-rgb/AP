@@ -172,9 +172,9 @@ export default function Main() {
                 if (e.key === "Enter") handleSearch();
               }}
               aria-label="DOI input"
-              disabled={loading}
               spellCheck="false"
               autoComplete="off"
+              inputMode="text"
               style={{
                 flex: 1,
                 padding: "16px 18px",
@@ -182,6 +182,7 @@ export default function Main() {
                 border: "1px solid #ccc",
                 borderRight: "none",
                 outline: "none",
+                zIndex: 10,
               }}
               onFocus={(e) => (e.target.style.border = "1.7px solid #003566ff")}
               onBlur={(e) => (e.target.style.border = "1px solid #ccc")}
