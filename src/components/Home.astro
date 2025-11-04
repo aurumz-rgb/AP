@@ -1,0 +1,137 @@
+---
+---
+<div id="container">
+  <img id="background" src="/background.svg" alt="" fetchpriority="high" />
+
+  <main>
+    <section id="hero">
+    </section>
+  </main>
+
+  <!-- Full-width Bottom Panel -->
+  <footer id="bottom-panel">
+    <div class="panel-content">
+      <span> Version v2.0.0</span>
+      <span class="center-link"><a href="https://github.com/aurumz-rgb/AP" target="_blank" rel="noopener noreferrer">© Vihaan Sahu 2025</a></span>
+      <span class="made-by">Apache 2.0</span>
+    </div>
+  </footer>
+</div>
+
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #1e1e1e;
+    overflow: hidden; /* Prevent scrolling */
+  }
+
+  #background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    filter: blur(1px);
+    object-fit: cover;
+  }
+
+  #container {
+    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+    height: 100%;
+  }
+
+  main {
+    height: calc(100vh - 40px); 
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 80px;
+    box-sizing: border-box;
+    overflow: hidden; 
+    width: 100%;
+  }
+
+  #hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .logo-placeholder {
+    margin-bottom: 1px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  /* Bottom Full-Width Panel */
+  #bottom-panel {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #1e1e1eff;
+    color: #ccc;
+    padding: 8px 0;
+    z-index: 10;
+  }
+
+  #bottom-panel .panel-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    position: relative;
+    flex-wrap: wrap;
+    gap: 4px; 
+  }
+
+  #bottom-panel a {
+    color: #ccc;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  #bottom-panel a:hover {
+    text-decoration: underline;
+  }
+
+  .center-link {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .made-by {
+    font-size: 12px;
+    color: #ccc;
+    font-weight: 500;
+  }
+
+  /* RESPONSIVENESS */
+  @media (max-width: 1024px) {
+    main { padding-top: 70px; }
+    #bottom-panel .panel-content { font-size: 11px; }
+  }
+
+  @media (max-width: 768px) {
+    main { padding-top: 60px; }
+    #bottom-panel .panel-content { font-size: 11px; gap: 3px; }
+    .center-link { position: static; transform: none; order: 2; text-align: center; width: 100%; }
+    #bottom-panel .panel-content span { flex: 1 1 45%; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    main { padding-top: 50px; }
+    #bottom-panel .panel-content { flex-direction: column; gap: 2px; }
+    #bottom-panel .panel-content span { flex: 1 1 100%; text-align: center; }
+    .center-link { width: 100%; }
+  }
+</style>

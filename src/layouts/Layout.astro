@@ -1,0 +1,107 @@
+---
+import ProgressBar from "../components/ProgressBar.jsx";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <meta name="google-site-verification" content="aKV0vIFpaIFd0abDV6k3C8hROocfDOth1y68iKGfqTg" />
+
+
+    <title>AccessPaper - Instantly Access 50M+ Free Research Papers | DOI Search Tool</title>
+    <meta name="description" content="AccessPaper unlocks 50+ million research papers instantly. Search by DOI to find free, legal full-text articles from Unpaywall, arXiv, bioRxiv, PubMed Central, and 40+ trusted sources. No paywalls, no delays - just knowledge." />
+    <meta name="keywords" content="free research papers, open access science, DOI search, academic articles, scholarly papers, Unpaywall, arXiv, bioRxiv, PubMed Central, research tools, academic search, scientific literature, journal articles, open science, research database, paper finder, scholarly communication" />
+    <meta name="author" content="Aurumz" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://accesspaper.vercel.app" />
+    <link rel="icon" href="/favicon.png" type="image/png" />
+    
+
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+    <meta name="distribution" content="global" />
+    <meta name="rating" content="general" />
+    <meta name="theme-color" content="#1e1e1e" />
+    <meta name="application-name" content="AccessPaper" />
+    <meta name="msapplication-TileColor" content="#1e1e1e" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="AccessPaper" />
+
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://accesspaper.vercel.app" />
+    <meta property="og:title" content="AccessPaper - Instantly Access 50M+ Free Research Papers" />
+    <meta property="og:description" content="Unlock 50+ million research papers instantly. Search by DOI to find free, legal full-text articles from Unpaywall, arXiv, bioRxiv, PubMed Central, and 40+ trusted sources. No paywalls, no delays - just knowledge." />
+    <meta property="og:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:site_name" content="AccessPaper" />
+    <meta property="og:locale" content="en_US" />
+
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://accesspaper.vercel.app" />
+    <meta name="twitter:title" content="AccessPaper - Instantly Access 50M+ Free Research Papers" />
+    <meta name="twitter:description" content="Unlock 50+ million research papers instantly. Search by DOI to find free, legal full-text articles from Unpaywall, arXiv, bioRxiv, PubMed Central, and 40+ trusted sources. No paywalls, no delays - just knowledge." />
+    <meta name="twitter:image" content="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png" />
+    <meta name="twitter:creator" content="@aurumz_rgb" />
+    <meta name="twitter:site" content="@aurumz_rgb" />
+
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "AccessPaper",
+      "description": "AccessPaper unlocks 50+ million research papers instantly. Search by DOI to find free, legal full-text articles from Unpaywall, arXiv, bioRxiv, PubMed Central, and 40+ trusted sources.",
+      "url": "https://accesspaper.vercel.app",
+      "applicationCategory": "EducationalApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "creator": {
+        "@type": "Person",
+        "name": "Aurumz"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "AccessPaper"
+      },
+      "featureList": [
+        "DOI search functionality",
+        "Access to 50+ million research papers",
+        "Integration with 40+ academic sources",
+        "Free and legal full-text article access",
+        "No paywall restrictions"
+      ]
+    }
+    </script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" />
+  </head>
+
+  <body>
+
+    <ProgressBar client:load />
+    <slot />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Inter, Roboto, 'Helvetica Neue', 'Arial Nova', 'Nimbus Sans', Arial, sans-serif;
+    background-color: #1e1e1e;
+  }
+</style>

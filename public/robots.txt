@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://accesspaper.vercel.app/sitemap.xml
