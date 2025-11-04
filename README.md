@@ -47,7 +47,8 @@
 
 ---
 
-📬 About
+## 📬 About
+
 This is just the frontend of AccessPaper, please checkout the backend i.e https://github.com/aurumz-rgb/AccessPaper for more information.
 Thank you.
 
