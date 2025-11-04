@@ -80,8 +80,87 @@ import ProgressBar from "../components/ProgressBar.jsx";
         "Integration with 40+ academic sources",
         "Free and legal full-text article access",
         "No paywall restrictions"
+      ],
+      "image": [
+        "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot1--.png",
+        "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot1.png",
+        "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot2--.png",
+        "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot2.png",
+        "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/preview11.png",
+        "https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png"
       ]
     }
+    </script>
+
+    <script type="application/ld+json">
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "contentUrl": "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot1--.png",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Person",
+          "name": "Aurumz"
+        },
+        "copyrightNotice": "Copyright © 2023 AccessPaper"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "contentUrl": "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot1.png",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Person",
+          "name": "Aurumz"
+        },
+        "copyrightNotice": "Copyright © 2023 AccessPaper"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "contentUrl": "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot2--.png",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Person",
+          "name": "Aurumz"
+        },
+        "copyrightNotice": "Copyright © 2023 AccessPaper"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "contentUrl": "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot2.png",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Person",
+          "name": "Aurumz"
+        },
+        "copyrightNotice": "Copyright © 2023 AccessPaper"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "contentUrl": "https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/preview11.png",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Person",
+          "name": "Aurumz"
+        },
+        "copyrightNotice": "Copyright © 2023 AccessPaper"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "ImageObject",
+        "contentUrl": "https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png",
+        "license": "https://creativecommons.org/licenses/by/4.0/",
+        "creator": {
+          "@type": "Person",
+          "name": "Aurumz"
+        },
+        "copyrightNotice": "Copyright © 2023 AccessPaper"
+      }
+    ]
     </script>
 
 
@@ -92,6 +171,16 @@ import ProgressBar from "../components/ProgressBar.jsx";
 
     <ProgressBar client:load />
     <slot />
+    
+    <!-- Hidden images for Google indexing -->
+    <div style="display: none;">
+      <img src="https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot1--.png" alt="AccessPaper Screenshot 1" />
+      <img src="https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot1.png" alt="AccessPaper Screenshot 1" />
+      <img src="https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot2--.png" alt="AccessPaper Screenshot 2" />
+      <img src="https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/Screenshot2.png" alt="AccessPaper Screenshot 2" />
+      <img src="https://raw.githubusercontent.com/aurumz-rgb/AP/main/screenshots/preview11.png" alt="AccessPaper Preview" />
+      <img src="https://raw.githubusercontent.com/aurumz-rgb/AP/main/public/og-image.png" alt="AccessPaper Open Graph Image" />
+    </div>
   </body>
 </html>
 
